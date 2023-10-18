@@ -19,7 +19,7 @@
 
     &__label {
       display: block;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.025em;
       line-height: 1.25;
     }
     &__icon {
@@ -50,10 +50,10 @@
 
   &--grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr;
     grid-gap: 1rem;
-    padding: 2rem;
+    padding: 3rem 2rem;
 
     &__item {
       display: flex;
@@ -81,7 +81,7 @@
 
       &__thumbnail {
         width: 100%;
-        border-radius: 0.5rem;
+        border-radius: 0.45rem;
         transition: opacity 150ms ease;
         position: relative;
         overflow: hidden;

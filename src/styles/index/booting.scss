@@ -6,7 +6,7 @@
   width: 100vw;
   height: 100vh;
   // background-color: #e81000;
-  background-color: #0357f1;
+  background-color: var(--windowDarkGrey);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,11 +41,15 @@
     gap: 2rem 4rem;
 
     &__icon {
-      width: 16rem;
+      width: 4rem;
       // margin-left: -4rem;
     }
-    &__loading {
-      width: 12rem;
+    &__label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.25rem;
     }
   }
 }

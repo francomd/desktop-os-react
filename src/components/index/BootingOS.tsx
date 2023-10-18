@@ -1,18 +1,13 @@
-const BootingOS = ({ isLoading = true }: {isLoading: boolean}) => {
+const BootingOS = ({ isLoading = true }: { isLoading: boolean }) => {
   return (
     <div className={`booting ${isLoading ? '' : 'finish'}`}>
       <div className="booting__content">
         <img
-          // src="./static/img/LOADING_HEADS.gif"
-          src="./static/img/BADTRIP_HEADS.gif"
-          alt="Illustration"
+          src="./static/img/system/spin.svg"
+          alt="loading"
           className="booting__content__icon"
         />
-        <img
-          src="./static/img/LOADING_TEXT.gif"
-          alt="Illustration"
-          className="booting__content__loading"
-        />
+        <span className="booting__content__label">Desktop OS</span>
       </div>
     </div>
   )
