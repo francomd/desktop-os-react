@@ -19,16 +19,22 @@ const AppsWindow = () => {
     }
   })
 
-  if (!app || app?.type !== 'app') return null
+  useEffect(() => {
+    if (app) {
+      document.querySelector('.main-layout')?.classList.add('desktop--blur')
+    } else {
+      document.querySelector('.main-layout')?.classList.remove('desktop--blur')
+    }
+  }, [app])
 
   return (
-    <div className={`apps-window window--${app.windowSize.toLowerCase()}`}>
+    <div className={`apps-window window--${app && app?.type == 'app' && app.windowSize.toLowerCase()} ${!app || app?.type !== 'app' ? 'window--hide' : ''}`}>
       <>
         <div className="apps-window__header">
-          <span className="apps-window__header__title">{app.label}</span>
+          <span className="apps-window__header__title">{app?.label || ` `}</span>
           <button onClick={clearApp} className="apps-window__header__close" />
         </div>
-        <div className="apps-window__content">{app.component}</div>
+        <div className="apps-window__content">{app?.type == 'app' && app.component}</div>
       </>
     </div>
   )
