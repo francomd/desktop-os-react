@@ -11,7 +11,7 @@ export default function Custom404() {
         />
         <h1 className="error-screen__content__message">
           <strong>404</strong>
-          {` `}The page doesn't exist dude. Go back to{' '}
+          {` The page doesn't exist dude. Go back to `}
           <Link href="/">home</Link>
         </h1>
       </div>

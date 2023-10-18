@@ -1,12 +1,19 @@
-export const generateRandomNumbersBetweenRange = (len, min, max) => {
-  var toReturn = [],
-    tempObj = {},
+export const generateRandomNumbersBetweenRange = (
+  len: number,
+  min: number,
+  max: number
+) => {
+  let toReturn = [],
+    tempObj = new Map(),
     i = 0
 
   for (; i < len; i++) {
-    var randomInt = Math.floor(Math.random() * (max - min)) + min
-    if (tempObj['key_' + randomInt] === undefined) {
-      tempObj['key_' + randomInt] = randomInt
+    const randomInt = Math.floor(Math.random() * (max - min)) + min
+
+    let tmpObjIteration = tempObj.get('key_' + randomInt)
+
+    if (tmpObjIteration === undefined) {
+      tmpObjIteration = randomInt
       toReturn.push(randomInt)
     } else {
       i--

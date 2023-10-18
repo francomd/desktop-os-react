@@ -10,26 +10,26 @@ const DockBar = (): JSX.Element => {
     app => APPS_DATA[app as keyof TApps]?.hide !== true
   ) as (keyof typeof DOCK_APPS)[]
 
-  const zoomEffect = event => {
+  const zoomEffect = (event: React.MouseEvent<HTMLDivElement>) => {
     const app = event.currentTarget
-    const appPrevious = app.previousSibling
-    const appNext = app.nextSibling
+    const appPrevious = app.previousElementSibling
+    const appNext = app.nextElementSibling
     app.classList.add('zoomed')
     appPrevious?.classList.add('sibiling-1')
-    appPrevious?.previousSibling?.classList.add('sibiling-2')
+    appPrevious?.previousElementSibling?.classList.add('sibiling-2')
     appNext?.classList.add('sibiling-1')
-    appNext?.nextSibling?.classList.add('sibiling-2')
+    appNext?.nextElementSibling?.classList.add('sibiling-2')
   }
 
-  const resetZoomEffect = event => {
+  const resetZoomEffect = (event: React.MouseEvent<HTMLDivElement>) => {
     const app = event.currentTarget
-    const appPrevious = app.previousSibling
-    const appNext = app.nextSibling
+    const appPrevious = app.previousElementSibling
+    const appNext = app.nextElementSibling
     app.classList.remove('zoomed')
     appPrevious?.classList.remove('sibiling-1')
-    appPrevious?.previousSibling?.classList.remove('sibiling-2')
+    appPrevious?.previousElementSibling?.classList.remove('sibiling-2')
     appNext?.classList.remove('sibiling-1')
-    appNext?.nextSibling?.classList.remove('sibiling-2')
+    appNext?.nextElementSibling?.classList.remove('sibiling-2')
   }
 
   const renderComponent = (
@@ -48,13 +48,13 @@ const DockBar = (): JSX.Element => {
     return (
       <div
         className={`dock-app ${isDisabled ? 'dock-app--disabled' : ''}`}
-        onMouseEnter={!isDisabled ? zoomEffect : null}
-        onMouseLeave={!isDisabled ? resetZoomEffect : null}
+        onMouseEnter={!isDisabled ? zoomEffect : () => { }}
+        onMouseLeave={!isDisabled ? resetZoomEffect : () => { }}
         key={text}
       >
         <Tooltip text={text} position="right" className="uppercase">
           <img
-            onClick={() => (!isDisabled ? setApp(appName) : null)}
+            onClick={() => (!isDisabled ? setApp(appName) : () => { })}
             width="48"
             draggable={false}
             src={src}

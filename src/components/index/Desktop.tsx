@@ -12,35 +12,39 @@ const GRID = {
 const Desktop = () => {
   const { setApp } = useAppsContext()
 
-  const drop = event => {
+  const drop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault()
-    const id = event.dataTransfer.getData('Text')
-    const selectedApp = document.getElementById(id)
+    const id = event.dataTransfer?.getData('Text')
+    const selectedApp = document.getElementById(String(id))
 
-    if (event.currentTarget.hasChildNodes()) return
-    event.currentTarget.appendChild(selectedApp)
+    if (event.currentTarget?.hasChildNodes()) return
+    event.currentTarget?.appendChild(selectedApp!)
 
     if (typeof window !== 'undefined') {
-      let storedData = localStorage.getItem('DesktopAppsRandomPosition')
-      if (!storedData) return
-      storedData = JSON.parse(storedData)
-      storedData[selectedApp.getAttribute('data-app')] = Number(
-        event.currentTarget.getAttribute('data-cell')
-      )
+      const storedData = localStorage.getItem('DesktopAppsRandomPosition')
+      if (storedData === null || selectedApp === null) return
+      const parsedStoredData = JSON.parse(storedData)
+      if (parsedStoredData.length === 0) return
+
+      const dataApp = selectedApp?.getAttribute('data-app') as string
+      parsedStoredData[dataApp] = Number(
+        event.currentTarget.getAttribute('data-cell')!)
+
       localStorage.setItem(
         'DesktopAppsRandomPosition',
-        JSON.stringify(storedData)
+        JSON.stringify(parsedStoredData)
       )
     }
   }
 
-  const allowDrop = event => {
+  const allowDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault()
   }
 
-  const dragStart = event => {
-    event.dataTransfer.setData('Text', event.target.parentElement.id)
+  const dragStart = (event: React.DragEvent<HTMLImageElement>) => {
+    event.dataTransfer.setData('Text', (event.target as HTMLImageElement).parentElement!.id)
   }
+
 
   const renderGrid = React.useMemo(() => {
     // TODO memo this return and check re-renders
