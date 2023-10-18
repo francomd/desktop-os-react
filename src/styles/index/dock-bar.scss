@@ -1,0 +1,49 @@
+.dock-bar {
+  width: 5rem;
+  margin: 2rem 1rem;
+  padding: 0.75rem;
+  background: rgba(var(--bodyColor_rgb), 0.75);
+  border: 2px solid var(--borderColor);
+  border-radius: var(--borderRadius);
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+
+  .dock-app {
+    margin-bottom: 1rem;
+    transition: transform 0.15s ease-in-out;
+    cursor: pointer;
+
+    &--disabled {
+      filter: grayscale(1);
+      cursor: default;
+    }
+
+    &__img {
+      width: 3rem;
+      height: 3rem;
+      object-fit: contain;
+    }
+
+    &.zoomed {
+      transform: scale(1.2);
+    }
+
+    &.sibiling-1 {
+      transform: scale(1.075);
+    }
+
+    &.sibiling-2 {
+      transform: scale(1.025);
+    }
+
+    &:last-child {
+      margin-top: auto;
+    }
+  }
+}

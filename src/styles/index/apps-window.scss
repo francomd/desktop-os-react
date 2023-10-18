@@ -1,0 +1,96 @@
+.apps-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(
+    calc(-50% + 3rem),
+    calc(-50% + 1.25rem)
+  ); // dock space and menu bar size
+  width: 90vw;
+  background-color: var(--windowBackground);
+  filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.25));
+  border-radius: var(--windowBorderRadius);
+  border: 2px solid var(--borderColor);
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  z-index: 9995;
+
+  @media screen and (max-width: 1280px) {
+    transform: translate(-50%, calc(-50% + 1.25rem)); // menu bar size
+    width: 98vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    transform: translate(-50%, -50%);
+    top: calc(50% + 1.5rem);
+    height: calc(100% - 4rem);
+    width: calc(100% - 1rem);
+  }
+
+  &.window--small {
+    width: 53vw;
+    height: 60vh;
+  }
+
+  &.window--medium {
+    width: 60vw;
+    height: 70vh;
+  }
+
+  &.window--hide {
+    display: none;
+  }
+
+  &__header {
+    padding: 0.625rem 0.75rem;
+    background-color: var(--windowGrey);
+    border-radius: var(--windowBorderRadius) var(--windowBorderRadius) 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+
+    &__title {
+      font-size: 1.25rem;
+      letter-spacing: 0.5em;
+      line-height: 1;
+      text-transform: uppercase;
+      color: var(--bodyColor);
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    &__close {
+      position: absolute;
+      right: 0.75rem;
+      top: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--bodyColor);
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      background-image: url('/static/img/system/close-minimize.svg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      width: 3rem;
+      height: 1rem;
+      outline: none;
+
+      &:hover,
+      &:active {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__content {
+    border-radius: 0 0 var(--windowBorderRadius) var(--windowBorderRadius);
+    border-top: 2px solid var(--borderColor);
+    flex-grow: 1;
+    overflow: hidden;
+    height: 100%;
+  }
+}
