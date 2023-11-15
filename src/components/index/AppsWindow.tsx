@@ -4,11 +4,14 @@ import { useEffect } from 'react'
 const AppsWindow = () => {
   const { app, clearApp } = useAppsContext()
 
+  // Close app on ESC key press or click on desktop
   useEffect(() => {
     if (typeof window !== 'undefined') {
       document.addEventListener('keydown', e => {
         if (e.key === 'Escape') clearApp()
       })
+      // .desktop is the div that contains the desktop grid
+      // src/components/index/Desktop/Desktop.tsx
       document.querySelector('.desktop')?.addEventListener('click', e => {
         if (app) clearApp()
       })
@@ -17,10 +20,14 @@ const AppsWindow = () => {
     return () => {
       document.removeEventListener('keydown', () => { })
     }
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
+  // Blur desktop when app is open
   useEffect(() => {
     if (app) {
+      // .main-layout is the main div that contains the desktop and dockbar
+      // src/pages/index.tsx
       document.querySelector('.main-layout')?.classList.add('desktop--blur')
     } else {
       document.querySelector('.main-layout')?.classList.remove('desktop--blur')
